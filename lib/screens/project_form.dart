@@ -152,6 +152,18 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                       _projectLink = value!;
                     });
                   },
+                  validator: (String? value) {
+                    final text = value?.trim() ?? '';
+                    if (text.isEmpty) return null; // opsional
+                    if (text.length > 500) return "URL maksimal 500 karakter!";
+                    final uri = Uri.tryParse(text);
+                    final isHttp =
+                        uri != null &&
+                        (uri.scheme == 'http' || uri.scheme == 'https') &&
+                        uri.host.isNotEmpty;
+                    if (!isHttp) return "Masukkan URL http(s) yang valid!";
+                    return null;
+                  },
                 ),
               ),
 
