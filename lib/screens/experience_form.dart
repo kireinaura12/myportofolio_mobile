@@ -58,7 +58,7 @@ class _ExperienceFormPage extends State<ExperienceFormPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text('Add Experience Form')),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.black,
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
@@ -214,7 +214,7 @@ class _ExperienceFormPage extends State<ExperienceFormPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all(Colors.indigo),
+                      backgroundColor: WidgetStateProperty.all(Colors.black),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
