@@ -31,3 +31,28 @@ Claude.ai
 - Membantu memperbaiki layout tombol menu agar tidak overflow setelah jumlah tombol bertambah.
 - Membantu menjelaskan materi Flutter yang berkaitan dengan pertanyaan refleksi, yaitu widget tree, widget yang digunakan, MaterialApp, StatelessWidget dan StatefulWidget, BuildContext, serta hot reload dan hot restart.
 Chat AI: https://claude.ai/share/ddf49120-64fc-47b7-9393-280d2e50c039
+
+### Tugas 8
+
+1. 
+Navigator.push() menambahkan halaman baru di atas halaman yang sedang running, sehingga halaman lama tetap tersimpan di stack dan user bisa kembali ke sana. 
+Navigator.pushReplacement() mengganti halaman yang sedang running dengan halaman baru, sehingga halaman lama dibuang atau di-pop dari stack dan tidak bisa dikembalikan lewat tombol back. 
+Navigator.pop() membuang atau pop halaman paling atas dari stack sehingga user kembali ke halaman di bawahnya.
+Untuk membuka formulir dari kartu aksi, project ini memakai Navigator.push(). Pada ItemCard, kartu "Tambah Proyek" dan "Tambah Experience" memanggil Navigator.push() ke ProjectFormPage atau ExperienceFormPage, agar user bisa kembali ke halaman utama dengan tombol back.
+Home di drawer menggunakan Navigator.pushReplacement() dengan MaterialPageRoute. Halaman formulir yang sedang running diganti dengan halaman utama, sehingga user sampai di halaman utama tanpa perlu menekan tombol back. Cara ini juga yang dipakai untuk menguji alur back di Chrome, karena Chrome tidak punya tombol back sistem.
+2. 
+Scaffold menyediakan kerangka dasar halaman, yaitu tempat untuk AppBar, Drawer, dan body. AppBar menampilkan judul halaman di bagian atas, sedangkan Drawer menyediakan menu navigasi yang muncul dari sisi kiri. Karena setiap halaman memakai susunan yang sama, user selalu menemukan judul di tempat yang sama dan menu navigasi yang sama. Pada project ini, drawer dibuat sekali sebagai LeftDrawer, lalu dipasang lewat drawer const LeftDrawer() di MyHomePage, ProjectFormPage, dan ExperienceFormPage, sehingga isinya tidak perlu ditulis ulang di setiap halaman.
+Contoh penggunaan warna tema adalah warna black dipakai di beberapa tempat. Di main.dart, ColorScheme.fromSeed memakai seedColor Colors.black. AppBar pada ProjectFormPage dan ExperienceFormPage memakai backgroundColor Colors.black dengan foregroundColor putih, DrawerHeader pada LeftDrawer memakai warna black yang sama, dan tombol Save pada kedua form juga berwarna black. Sementara itu, AppBar pada MyHomePage mengambil warna lewat Theme.of(context).colorScheme.primary, yang berasal dari seed black tersebut.
+3. 
+Formulir disusun dengan Form yang membungkus SingleChildScrollView, lalu Column yang berisi seluruh input dengan crossAxisAlignment.start. Column dipilih karena input dibaca dari atas ke bawah, dan alignment ke kiri membuat label serta kolom terlihat rapi.
+Setiap input dibungkus Padding dengan jarak 8.0. Padding berperan untuk memberi jarak antar kolom dan antara kolom dengan tepi layar, sehingga input tidak saling menempel, terutama pada layar yang kecil.
+SingleChildScrollView berfungsi untuk membuat isi formulir bisa discroll. Ketika layar terbatas, misalnya pada saat keyboard tampil dan menutupi sebagian layar, isi formulir tidak terpotong dan tidak menimbulkan overflow. SDehingga user tetap bisa scroll untuk menjangkau semua input dan tombol Save.
+4. 
+GlobalKey<FormState> adalah key yang dipakai untuk mengakses Form dari luar, misalnya dari tombol Save. Key-nya disimpan di variabel _formKey lalu dipasang pada atribut key milik Form. 
+Validator adalah function di setiap TextFormField yang mengecek isi input, lalu return pesan error kalau isinya salah atau null kalau isinya benar. 
+Validate() adalah method yang menjalankan semua validator itu sekaligus. Hasilnya true kalau semua input benar, dan false kalau ada yang salah, sehingga error message muncul di kolom yang inputnya salah.
+Saat tombol Save atau Simpn ditekan, program memanggil _formKey.currentState!.validate(). Dialog ringkasan hanya muncul kalau hasilnya true. Kalau false, pengguna tetap di form dan melihat error messagenya.
+Contoh nilai yang ditolak adalah link thumbnail "bukan-url". Validator mengecek apakah link itu diawali http atau https dan punya nama host. Karena "bukan-url" tidak memenuhi keduanya, kolom menampilkan errr message "Masukkan URL http(s) yang valid!" dan tombol Simpan tidak bisa menampilkan dialog.
+Memilih jenis input atau papan ketik saja belum cukup karena keduanya hanya mengatur tampilan dan cara mengetik, tidak memeriksa isinya. Papan ketik khusus URL tetap membiarkan user mengetik "bukan-url", atau menempelkan teks apa saja. Sehingga isinya tetap harus dicek lewat validasi.
+
+# AI Disclosure
