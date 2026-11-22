@@ -56,3 +56,10 @@ Contoh nilai yang ditolak adalah link thumbnail "bukan-url". Validator mengecek 
 Memilih jenis input atau papan ketik saja belum cukup karena keduanya hanya mengatur tampilan dan cara mengetik, tidak memeriksa isinya. Papan ketik khusus URL tetap membiarkan user mengetik "bukan-url", atau menempelkan teks apa saja. Sehingga isinya tetap harus dicek lewat validasi.
 
 # AI Disclosure
+Dalam pengerjaan project ini, saya menggunakan:
+Claude.ai
+- Membantu menjelaskan materi tutorial Flutter, yaitu drawer menu serta form dan elemen input.
+- Menganalisis checklist tugas dan menyusun urutan langkah pengerjaannya
+- Membantu merekomendasikan field formulir Experience dan pilihan kategori
+- Membantu menambahkan validasi, seperti validasi panjang nama dan format URL.
+- Mengecek checklist tugas untuk memastikan seluruh ketentuan sudah terpenuhi
