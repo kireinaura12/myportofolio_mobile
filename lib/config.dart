@@ -4,6 +4,8 @@
 // Override with `--dart-define=API_BASE_URL=http://localhost:8000` if you are testing on Chrome/Web browser
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-const String apiBaseUrl = kIsWeb
-    ? 'http://localhost:8000'
-    : 'http://10.0.2.2:8000';
+const String _definedBaseUrl = String.fromEnvironment('API_BASE_URL');
+
+const String apiBaseUrl = _definedBaseUrl != ''
+    ? _definedBaseUrl
+    : (kIsWeb ? 'http://localhost:8000' : 'http://10.0.2.2:8000');
